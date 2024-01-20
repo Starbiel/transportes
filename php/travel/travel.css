@@ -1,0 +1,108 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#container {
+    margin-top: 10px;
+    height: 87vh;
+}
+
+#formTravel {
+    display: flex;
+    flex-direction: column;
+    width: 80vw;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+    padding:2%;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: white;
+}
+
+input {
+    width: 50%;
+    margin: auto;
+    height: 30px;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+#carrierTravel {
+    margin-bottom: 0;
+}
+
+#carrierContainer {
+    width: 100%;
+}
+
+
+select {
+    width: 50.5%;
+    margin: auto;
+    height: 35px;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+input[type='date'] {
+    text-align: center;
+}
+
+input[type='submit'] {
+    margin-top: 30px;
+}
+
+input[type='submit']:hover {
+    cursor: pointer;
+    background-color: greenyellow;
+}
+
+input[type='submit']:active   {
+    border-style: initial;
+}
+
+a {
+    text-decoration: none;
+    font-size: 25px;
+    color: black;
+}
+
+#resultsLive {
+    width: 50.4%;
+    margin: auto;
+    background-color: rgb(243, 243, 243);
+    border-top: 0;
+    max-height: 70px;
+    overflow: auto;
+}
+
+.carrierNameHint {
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.5s, font-size 0.4s;
+}
+
+.carrierNameHint:hover {
+    cursor: pointer;
+    background-color: greenyellow;
+    font-size: 20px;
+}
+
+@media only screen and (max-width: 900px) {
+    input {
+        font-size: small;
+    }
+    select {
+        width: 52.5%;
+        font-size: small;
+    }
+    #resultsLive {
+        width: 51.8%;
+    }
+    #formTravel {
+        margin-top: 70px;
+    }
+}

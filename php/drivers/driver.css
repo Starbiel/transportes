@@ -1,0 +1,240 @@
+*{
+  margin: 0;
+}
+
+#container {
+    height: 80vh;
+}
+#add-driver {
+  background-color: white;
+  width: 50%;
+  margin: auto;
+  margin-top: 10px;
+  border: 1px solid black;
+  padding: 5px;
+  border-radius: 10px;
+  box-shadow: 2px 2px 2px 2px rgb(112, 112, 112);
+}
+
+h3 {
+    border-bottom: 1px solid rgb(0, 0, 0);
+}
+form {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#actual-drivers {
+  width: 95vw;
+  margin: auto;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 10px;
+  box-shadow: 2px 2px 2px 2px rgb(112, 112, 112);
+  padding: 1%;
+}
+
+table {
+  width: 100%;
+  text-align: center;
+  border-collapse: collapse;
+}
+
+.clickToAdd:hover {
+  cursor: pointer;
+  background-color: greenyellow;
+}
+
+.controlContainer {
+  position: relative;
+  width: 90%;
+}
+.inputFileHolder {
+  display: flex;
+  flex-direction: row-reverse;
+  overflow: hidden;
+  position: absolute;
+  width: 70%;
+}
+.inputFileHolder input {
+  cursor: pointer;
+  opacity: 0;
+  filter: alpha(opacity=0);
+  position: absolute;
+  right: 44px;
+  height: 32px;
+}
+.inputFileHolder a {
+  cursor: pointer;
+  float: right;
+}
+.btn {
+  display: inline-block;
+  padding: 5px 12px;
+  margin: 0;
+  font-size: 14px;
+  line-height: 20px;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  color: #333333;
+  background-color: #ebebeb;
+  border: 1px solid #b2b2b2;
+  border-bottom-color: #6c6c6c;
+}
+.btn-Gradiant {
+  background-image: -moz-linear-gradient(top, #ffffff, #cccccc);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#cccccc));
+  background-image: -webkit-linear-gradient(top, #ffffff, #cccccc);
+  background-image: -o-linear-gradient(top, #ffffff, #cccccc);
+  background-image: linear-gradient(to bottom, #ffffff, #cccccc);
+  background-repeat: repeat-x;
+  -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+  -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+  border-color: #cccccc #cccccc #a6a6a6;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffcccccc', GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+}
+.inputFileMask {
+  margin-right: 64px;
+  width: 50%;
+}
+.parentContainer {
+  width: 40%;
+}
+.pull-rigth {
+  float: right;
+}
+
+.btn-inverse:hover {
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+  background-color: #3c3737;
+  background-image: -moz-linear-gradient(top, #5c5c5c, #2f2f2f);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#5c5c5c), to(#2f2f2f));
+  background-image: -webkit-linear-gradient(top, #5c5c5c, #2f2f2f);
+  background-image: -o-linear-gradient(top, #5c5c5c, #2f2f2f);
+  background-image: linear-gradient(to bottom, #5c5c5c, #2f2f2f);
+  background-repeat: repeat-x;
+  color: white;
+}
+.btn-browse {
+  border-top-left-radius: 0;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 0;
+}
+.btn-flat-browse {
+  border-top-left-radius: 0;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 0;
+  background-color: #d6d6d6;
+  border: 1px solid #d6d6d6;
+  padding: 5px 12px;
+}
+.btn-flat {
+  margin: 0 0 0 10px;
+  font-size: 14px;
+  color: #ffffff;
+  padding: 6px 11px;
+  border: 0 solid;
+  background-color: #cc2e2e;
+}
+
+input {
+  display: inline-block;
+  height: 22px;
+  padding: 4px 6px;
+  font-size: 14px;
+  line-height: 20px;
+  color: #555555;
+  vertical-align: middle;
+}
+.fileInput {
+  width: 100%;
+}
+.inputType {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  font-size: 23px;
+  cursor: pointer;
+  opacity: 0;
+  filter: alpha(opacity=0);
+  transform: translate(-300px, 0) scale(4);
+  direction: ltr;
+  display: block;
+}
+.inputFileMaskText {
+  border: solid 1px #b2b2b2;
+  width: 100%;
+}
+.inputFileMaskText2 {
+  height: 20px;
+  border: solid 2px #d6d6d6;
+  width: 100%;
+}
+i {
+  font-family: 'Lato', sans-serif;
+  text-rendering: auto;
+}
+input.file {
+  position: relative;
+  text-align: right;
+  -moz-opacity: 0 ;
+  opacity: 0;
+  z-index: 2;
+  cursor: pointer;
+}
+
+
+@media only screen and (max-width: 1000px) {
+  #login {
+    display: flex;
+    flex-direction: column;
+  }
+  #container {
+    height: 50vh;
+  }
+  #add-driver{
+    margin-bottom: 10px;
+  }
+  #actual-drivers{
+    width: 80vw;
+    margin-top: 30px;
+    margin-bottom: 0;
+    overflow: auto;
+  }
+  td {
+    border-left: 1px solid black;
+    padding: 5px;
+  }
+  input {
+    width: 90%;
+    margin-bottom: 10px;
+  }
+  .parentContainer {
+    width: 90%;
+  }
+  .inputFileHolder {
+    left: 28px;
+  }
+  .controlContainer {
+    position: relative;
+    width: 100%;
+  }
+  #nameDriver{
+    margin-top: 10px;
+  }
+  .pull-right {
+    margin-top: 15px;
+    float: right;
+    width: 60%;
+  }
+}

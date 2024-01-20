@@ -1,5 +1,6 @@
 <?php 
 include "../database/server.php";
+$minhaChaveAPI = $_SERVER['MINHA_CHAVE_API'];
 spl_autoload_register(function($class) {
     $class = '../' . lcfirst(str_replace('\\', '/', $class) . '.php');  
     $class = str_replace('php/', '', $class);
@@ -74,7 +75,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="../../navbar.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://maps.googleapis.com/maps/api/js?key=MY_API&libraries=places&callback=initAutoComplete" async defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=<?= $minhaChaveAPI ?>&libraries=places&callback=initAutoComplete" async defer></script>
     <script src='travel.js' defer></script>
 </head>
 <body>

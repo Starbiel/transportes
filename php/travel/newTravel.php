@@ -8,10 +8,10 @@ spl_autoload_register(function($class) {
         require $class;
     }
 });
-use php\database\Execute;
 use php\validationArea\Validation;
-$validator = new Validation;
+use php\database\Execute;
 $executer = new Execute;
+$validator = (new Validation);
 
 function addDrivers($row) {
     $option = "<option value='" . $row['id_driver'] . "'>". $row['nome'] ."</option>";
@@ -83,7 +83,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         <button><a href="../../index.php"><p>Menu Principal</p><i class="fa-solid fa-house"></i></a></button>
         <button><a href="../drivers/newDriver.php"><p>Cadastrar Motorista</p><i class="fa-solid fa-person"></i></a></button>
         <button><a href="../truck/truck.php"><p>Caminhões</p><i class="fa-solid fa-road"></i></a></button>
-        <button><a href="../shipping/peddingShipping.html"><p>Acertamentos Pedentes</p><i class="fa-solid fa-pen"></i></a></button>
+        <?php if($executer->shippingOpen($conn)[0])echo "<button><a href=\"../shipping/peddingShipping.php\"><p>Acertamentos Pedentes</p><i class=\"fa-solid fa-pen\"></i></a></button>";?>
         <button><a href=""><p>Lucros</p><i class="fa-solid fa-money-bill"></i></a></button>
     </div>
     <div id="container">

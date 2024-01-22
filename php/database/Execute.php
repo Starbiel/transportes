@@ -1,13 +1,7 @@
 <?php 
 namespace php\database;
 
-spl_autoload_register(function($class) {
-    $class = '../' . lcfirst(str_replace('\\', '/', $class) . '.php');  
-    $class = str_replace('php/', '', $class);
-    if(file_exists($class)) {
-      require $class;
-    }
-  });
+require(__DIR__ . '\..\validationArea\validation.php');
 
 use php\validationArea\Validation;
 
@@ -23,6 +17,7 @@ class Execute {
     private int $truckId = 0;
     private string $truckPlate = "";
     private ?int $shippingId = NULL;
+    private array $shippingsOpen = [];
 
     public function __construct() {
         $this->checker = new Validation;
@@ -75,6 +70,20 @@ class Execute {
             'documentId' => $this->documentId,
             'shippingId' => $this->shippingId
         ];
+    }
+
+    public function shippingOpen($conn) {
+        $sql = "SELECT id_shipping FROM shipping WHERE finalizado = false";
+        $result = $conn->query($sql);
+        if($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) {
+                $this->shippingsOpen[] = $row['id_shipping'];
+            }
+            return [true, $this->shippingsOpen];
+        }
+        else {
+            return [false, 'Sem Resultado'];
+        }
     }
 
     public function ImageLoader($ImageId, $conn, $table = 'image') {

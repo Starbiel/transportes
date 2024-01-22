@@ -27,3 +27,4 @@ function setValor(item) {
     resultsLive.innerHTML = "";
     resultsLive.style.border = 0 + "px" + " solid black";
 }
+

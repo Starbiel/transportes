@@ -12,9 +12,8 @@ spl_autoload_register(function($class) {
 });
 use php\validationArea\Validation;
 use php\database\Execute;
-
+$executer = new Execute;
 $validator = (new Validation);
-$betterQuery = (new Execute);
 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -123,7 +122,7 @@ else {
         <button><a href="../../index.php"><p>Menu Principal</p><i class="fa-solid fa-house"></i></a></button>
         <button><a href="../truck/truck.php"><p>Caminhões</p><i class="fa-solid fa-truck"></i></i></a></button>
         <button><a href="../travel/newTravel.php"><p>Abrir viagem</p><i class="fa-solid fa-road"></i></a></button>
-        <button><a href="../shipping/peddingShipping.html"><p>Acertamentos Pedentes</p><i class="fa-solid fa-pen"></i></a></button>
+        <?php if($executer->shippingOpen($conn)[0])echo "<button><a href=\"../shipping/peddingShipping.php\"><p>Acertamentos Pedentes</p><i class=\"fa-solid fa-pen\"></i></a></button>";?>
         <button><a href=""><p>Lucros</p><i class="fa-solid fa-money-bill"></i></a></button>
     </div>
     <div id="container">
@@ -160,7 +159,7 @@ else {
                 $result = $conn->query($sql);
                 if($result->num_rows > 0) {
                   while ($row = $result->fetch_assoc()) {
-                    $resultBetterQuery = $betterQuery->driverFullQuery($row['id_driver'], $conn);
+                    $resultBetterQuery = $executer->driverFullQuery($row['id_driver'], $conn);
                     if($resultBetterQuery['state']) {
                       creatorTR($resultBetterQuery);
                     }
@@ -175,3 +174,6 @@ else {
 <script>
 </script>
 </html>
+<?php 
+$conn->close();
+?>

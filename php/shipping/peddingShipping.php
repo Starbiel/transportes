@@ -6,6 +6,6 @@
     <title>Document</title>
 </head>
 <body>
-    <button><a href="../../index.html">Voltar</a></button>
+    <button><a href="../../index.php">Voltar</a></button>
 </body>
 </html>

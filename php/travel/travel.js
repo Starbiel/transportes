@@ -1,5 +1,6 @@
 const resultsLive = document.querySelector('#resultsLive');
 const carrierTravel = document.querySelector('#carrierTravel');
+const closeButtons = document.getElementsByClassName('closeButton');
 
 carrierTravel.addEventListener('keyup', function(){
     if(this.value == "") {
@@ -28,3 +29,19 @@ function setValor(item) {
     resultsLive.style.border = 0 + "px" + " solid black";
 }
 
+for (let index = 0; index < closeButtons.length; index++) {
+    closeButtons[index].addEventListener('click', function() {
+        let data = new FormData();
+        data.append('travelId', this.id)
+        fetch('close.php', {
+            method: 'POST',
+            body: data
+        })
+        .then(response => response.text())
+        .then(data => {
+            console.log(data);
+            this.parentElement.parentElement.remove();
+        })
+
+    })
+}

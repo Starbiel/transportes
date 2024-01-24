@@ -18,6 +18,25 @@ function addDrivers($row) {
     echo $option;
 }
 
+function createInfo($info) {
+    $td = "<td>$info</td>";
+    return $td;
+}
+
+function createTR($row) {
+    $tr = "<tr class=\"travel-open\">";
+    foreach ($row as $key => $value) {
+        if($key == 'day') {
+            $value = str_replace('00:00:00', '', $value);
+        }
+        if($key != 'travel')
+        $tr .= createInfo($value);
+    }
+    $tr .= "<td><button class=\"closeButton\" id='". $row['travel']  ."'>Fechar Viagem</button></td>";
+    $tr .= "</tr>";
+    echo $tr;
+}
+
 if($_SERVER["REQUEST_METHOD"] == "POST") {
     if(isset($_POST['formTravel'])) {
         foreach ($_POST as $key => $value) {
@@ -56,10 +75,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             $conn->query($sql);
             $resultDriverQuery['shippingId'] = $conn->insert_id;
         }
-        $sql = "INSERT INTO travel(dia, origem, destino, valor, id_driver, id_shipping, id_carrier, distancia) VALUES (?,?,?,?,?,?,?,?)";
+        $sql = "INSERT INTO travel(dia, origem, destino, valor, id_driver, id_carrier, distancia) VALUES (?,?,?,?,?,?,?)";
         $statement = $conn->prepare($sql);
-        $statement->bind_param("sssdiiid", $date, $origem, $destiny, $price, $driverId, $resultDriverQuery['shippingId'], $carrier, $distance);
+        $statement->bind_param("sssdiid", $date, $origem, $destiny, $price, $driverId, $carrier, $distance);
         $statement->execute() or die("<b>Error:</b> Problema para localizar esse ID<br/>" . mysqli_connect_error());  
+        header("Location: newTravel.php");
     }
 }
 
@@ -75,6 +95,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="../../navbar.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=<?= $minhaChaveAPI ?>&libraries=places&callback=initAutoComplete" async defer></script>
     <script src='travel.js' defer></script>
 </head>
@@ -87,34 +108,69 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         <button><a href=""><p>Lucros</p><i class="fa-solid fa-money-bill"></i></a></button>
     </div>
     <div id="container">
-        <form id="formTravel" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
-            <label for="">Dia de Inicio</label>
-            <input type="date" name="dateTravel">
-            <label for="">Origem</label>
-            <input id="autocomplete" class="controls" type="text" placeholder="Search Box" name='origemTravel'/>
-            <label for="">Destino</label>
-            <input id="autocompleteTwo" type="text" name="destinyTravel">
-            <label for="">Distancia</label>
-            <input type="number" name="distanceTravel" id="distanceTravel" step="0.001">
-            <label for="">Valor</label>
-            <input type="number" name="priceTravel" id="">
-            <label for="">Motorista</label>
-            <select name="driver" id="">
-                <?php 
-                    $sql='SELECT id_driver, nome FROM driver WHERE ativo = 1 AND id_truck IS NOT NULL';
-                    $result = $conn->query($sql);
-                    while($row = $result->fetch_assoc()) {
-                        addDrivers($row);
-                    }
-                ?>
-            </select>
-            <label for="carrier">Transportadora</label>
-            <div id='carrierContainer'>
-                <input type="text" name="carrier" id="carrierTravel">
-                <div id='resultsLive'></div>
+        <div id="container-form">
+            <div id="form-header">
+                <p>Adicionar nova viagem</p>
+                <button id="form-open">Abrir</button>
             </div>
-            <input type="submit" value="Enviar" name="formTravel">
-        </form>
+            <form id="formTravel" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+                <label for="">Dia de Inicio</label>
+                <input type="date" name="dateTravel">
+                <label for="">Origem</label>
+                <input id="autocomplete" class="controls" type="text" placeholder="Search Box" name='origemTravel'/>
+                <label for="">Destino</label>
+                <input id="autocompleteTwo" type="text" name="destinyTravel">
+                <label for="">Distancia</label>
+                <input type="number" name="distanceTravel" id="distanceTravel" step="0.001">
+                <label for="">Valor</label>
+                <input type="number" name="priceTravel" id="">
+                <label for="">Motorista</label>
+                <select name="driver" id="">
+                    <?php 
+                        $sql='SELECT id_driver, nome FROM driver WHERE ativo = 1 AND id_truck IS NOT NULL';
+                        $result = $conn->query($sql);
+                        while($row = $result->fetch_assoc()) {
+                            addDrivers($row);
+                        }
+                    ?>
+                </select>
+                <label for="carrier">Transportadora</label>
+                <div id='carrierContainer'>
+                    <input type="text" name="carrier" id="carrierTravel">
+                    <div id='resultsLive'></div>
+                </div>
+                <input type="submit" value="Enviar" name="formTravel">
+            </form>
+        </div>
+        <?php 
+            $sql='SELECT travel.id_travel AS travel, travel.dia AS day, driver.nome AS driver, travel.valor AS value FROM travel, driver WHERE travel.id_driver = driver.id_driver AND id_shipping IS NULL';
+            $result = $conn->query($sql);
+            if($result->num_rows > 0):
+        ?>
+        <div id="container-travel">
+            <h3>Viagens em aberto</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Dia</th>
+                        <th>Motorista</th>
+                        <th>Valor</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php 
+                        {
+                            while($row = $result->fetch_assoc()) {
+                                createTR($row);
+                            }
+                        }
+                    ?>
+                </tbody>
+            </table>
+        </div>
+        <?php 
+            endif;
+        ?>
         <button><a href="../../index.html">Voltar</a></button>
     </div>
     <script>
@@ -157,6 +213,16 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                 });
             }
         }
+        $("#formTravel").hide();
+        $("#form-open").click(function(){
+            $("#formTravel").slideToggle('slow');
+            if($("#form-open").text() == "Abrir") {
+                $("#form-open").text("Fechar");
+            }
+            else {
+                $("#form-open").text("Abrir");
+            }
+        });
     </script>
 </body>
 </html>

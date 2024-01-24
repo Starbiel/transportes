@@ -6,6 +6,26 @@
     margin-top: 10px;
     height: 87vh;
 }
+#form-header {
+    width: 82vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: auto;
+    background-color: white;
+    border: 1px solid black;
+    padding: 1%;
+}
+
+#form-open {
+    width: 10%;
+    height: initial;
+    margin: 0;
+}
+
+#form-open:hover {
+    cursor: pointer;
+}
 
 #formTravel {
     display: flex;
@@ -16,7 +36,7 @@
     margin-bottom: 10px;
     padding:2%;
     border: 1px solid black;
-    border-radius: 10px;
+    border-radius: 0px 0px 10px 10px;
     background-color: white;
 }
 
@@ -91,6 +111,32 @@ a {
     font-size: 20px;
 }
 
+#container-travel {
+    margin-bottom: 20px;
+}
+table {
+    margin: auto;
+    background-color: white;
+    width: 84vw;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 1%;
+}
+tbody {
+    border-collapse: collapse;
+}
+td {
+    margin: 0px 20px 0px 20px;
+    border-top: 1px solid black;
+}
+.closeButton {
+    width: 60px;
+    margin-top: 10px;
+}
+.closeButton:hover {
+    cursor: pointer;
+}
+
 @media only screen and (max-width: 900px) {
     input {
         font-size: small;
@@ -102,7 +148,7 @@ a {
     #resultsLive {
         width: 51.8%;
     }
-    #formTravel {
-        margin-top: 70px;
+    #form-open {
+        width: 15%;
     }
 }

@@ -1,0 +1,62 @@
+.singleShipping {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 10px;
+    margin: 20px 0px 20px 0px;
+}
+
+.singleInfo {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.singleResults {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    border-bottom: 1px solid black;
+    padding-bottom: 1%;
+}
+
+.moreCalc {
+    margin: 0;
+    width: 5%;
+}
+
+.extraCalcDiv {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.driverResult {
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+}
+
+.driverHeader {
+    display: flex;
+    flex-direction: row;   
+    justify-content: space-around;
+    padding-bottom: 10px;
+    border-bottom: 1px solid black;
+    margin: 10px 0px 10px 0px;
+}
+
+.moreInput {
+    margin: 0;
+}
+
+input {
+    margin-bottom: 15px;
+}
+
+.truckResult {
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+}

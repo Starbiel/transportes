@@ -18,6 +18,8 @@ class Execute {
     private string $truckPlate = "";
     private ?int $shippingId = NULL;
     private array $shippingsOpen = [];
+    private string $shippingStartDay = "";
+    private int $shippingSum = 0;
 
     public function __construct() {
         $this->checker = new Validation;
@@ -52,11 +54,18 @@ class Execute {
                 $this->truckPlate = "Sem caminhão";
             }
             $result->free();
-            $sql = "SELECT id_shipping, finalizado, id_driver FROM shipping WHERE id_driver = $this->driverID AND finalizado = false";
+            $sql = "SELECT id_shipping, inicio, finalizado, id_driver FROM shipping WHERE id_driver = $this->driverID AND finalizado = false";
             $resultTwo = $conn->query($sql);
             if($resultTwo->num_rows > 0) {
                 $rowTwo = $resultTwo->fetch_assoc();
                 $this->shippingId = $rowTwo['id_shipping'];
+                $this->shippingStartDay = $rowTwo['inicio'];
+                $sql = "SELECT sum(valor) AS result FROM travel WHERE id_shipping = " . $this->shippingId;
+                $resultTwo = $conn->query($sql);
+                if($resultTwo->num_rows > 0) {
+                    $rowTwo = $resultTwo->fetch_assoc();
+                    $this->shippingSum = $rowTwo['result'];
+                }
             }
             $conn->next_result();
         }
@@ -68,7 +77,9 @@ class Execute {
             'plate' => $this->truckPlate,
             'truckId' => $this->truckId,
             'documentId' => $this->documentId,
-            'shippingId' => $this->shippingId
+            'shippingId' => $this->shippingId,
+            'shippingStart' => $this->shippingStartDay,
+            'shippingSum' => $this->shippingSum
         ];
     }
 

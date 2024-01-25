@@ -20,6 +20,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     $statement->execute() or die("<b>Error:</b> Problema para localizar esse ID<br/>" . mysqli_connect_error());
     $result = $statement->get_result();  
     if($result->num_rows > 0){
+        date_default_timezone_set('America/Sao_Paulo');
+        $today = date("Y-m-d H:i:s"); 
         $row = $result->fetch_assoc();
         $sql = "SELECT id_shipping FROM shipping WHERE finalizado = 0 AND id_driver= " . $row['id_driver'];
         $resultTwo = $conn->query($sql);

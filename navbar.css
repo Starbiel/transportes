@@ -70,6 +70,34 @@ button:hover {
     background-color: rgb(188, 252, 93);
 }
 
+#confirmBack {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(248, 141, 141, 0.74);
+}
+
+#confirmForm {
+    padding: 5%;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+#confirmForm > button:hover {
+    cursor: pointer;
+}
+
+.acceptButton:hover {
+    background-color: rgb(255, 47, 47);
+    color: white;
+}
+
 @media only screen and (max-width: 900px) {
     body {
         width: 96vw;

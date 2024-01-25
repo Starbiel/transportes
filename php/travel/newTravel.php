@@ -70,11 +70,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             $conn->query($sql);
             $carrier = $conn->insert_id;
         }
-        if($resultDriverQuery['shippingId'] == NULL) { 
-            $sql = "INSERT INTO shipping(inicio, finalizado, id_driver) VALUES('$today', false, $driverId)";
-            $conn->query($sql);
-            $resultDriverQuery['shippingId'] = $conn->insert_id;
-        }
         $sql = "INSERT INTO travel(dia, origem, destino, valor, id_driver, id_carrier, distancia) VALUES (?,?,?,?,?,?,?)";
         $statement = $conn->prepare($sql);
         $statement->bind_param("sssdiid", $date, $origem, $destiny, $price, $driverId, $carrier, $distance);

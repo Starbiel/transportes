@@ -43,8 +43,8 @@ function singleInfoAplicator($row) {
     $driverPart = ($row['shippingSum']*0.16);
     $truckPart = ($row['shippingSum']*0.10);
     $div .= "<tr class='singleResults'>
-                <td><p>Salario do Motorista:</p>R$"  . number_format($driverPart,2,",",".") . "</td>
-                <td><p>Parte do caminhão:</p>R$"  . number_format($truckPart,2,",",".") . "</td>
+                <td><p>Salario do Motorista:</p><p class='driverPayment'>R$"  . number_format($driverPart,2,",",".") . "</p></td>
+                <td><p>Parte do caminhão:</p><p class='truckPart'>R$"  . number_format($truckPart,2,",",".") . "</p></td>
                 <td><button class='moreCalc'>Calculos extras</button></td>
                 <td><button id='$shippingId' class='closeShipping'><p>Fechar acertamento</p><i class=\"fa-solid fa-check\"></i></button></td>
         </tr>";

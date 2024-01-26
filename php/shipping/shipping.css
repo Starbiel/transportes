@@ -93,6 +93,9 @@ input {
     td > p, button > p {
         display: none;
     }
+    .driverPayment, .truckPart {
+        display: initial;
+    }
     .moreCalc, .closeShipping {
         width: 80%;
         aspect-ratio: 1/1;

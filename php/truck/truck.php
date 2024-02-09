@@ -130,7 +130,7 @@ else {
         <button><a href="../drivers/newDriver.php"><p>Cadastrar Motorista</p><i class="fa-solid fa-person"></i></a></button>
         <button><a href="../travel/newTravel.php"><p>Abrir viagem</p><i class="fa-solid fa-road"></i></a></button>
         <?php if($executer->shippingOpen($conn)[0])echo "<button><a href=\"../shipping/peddingShipping.php\"><p>Acertamentos Pedentes</p><i class=\"fa-solid fa-pen\"></i></a></button>";?>
-        <button><a href=""><p>Lucros</p><i class="fa-solid fa-money-bill"></i></a></button>
+        <button><a href="../earnings/earning.php"><p>Lucros</p><i class="fa-solid fa-money-bill"></i></a></button>
     </div>
     <div id="container">
         <button><a href="newTruckModule/newTruck.php">Adicionar um Novo Caminhão</a></button>

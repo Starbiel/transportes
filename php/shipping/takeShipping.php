@@ -24,8 +24,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             $row = $result->fetch_assoc();
             $resultFullQuery = $executer->driverFullQuery($row['id_driver'], $conn);
             $driverPayment = $settingCalc->driverPaymentCalc($resultFullQuery['shippingSum'], $extras);
-            $truckPart = $settingCalc->truckerPartCalc($resultFullQuery['shippingSum']);
-            echo $driverPayment;
+            $truckPart = $settingCalc->truckerPartCalc($resultFullQuery['shippingSum'], $extras);
+            if($_POST['returnParam'] == 'truckResult') {
+                echo $truckPart;
+            }
+            else {
+                echo $driverPayment['driverPayment'];
+            }
         }
     }
 }

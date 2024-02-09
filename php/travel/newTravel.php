@@ -98,9 +98,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     <div id='nav-bar'>
         <button><a href="../../index.php"><p>Menu Principal</p><i class="fa-solid fa-house"></i></a></button>
         <button><a href="../drivers/newDriver.php"><p>Cadastrar Motorista</p><i class="fa-solid fa-person"></i></a></button>
-        <button><a href="../truck/truck.php"><p>Caminhões</p><i class="fa-solid fa-road"></i></a></button>
+        <button><a href="../truck/truck.php"><p>Caminhões</p><i class="fa-solid fa-truck"></i></a></button>
         <?php if($executer->shippingOpen($conn)[0])echo "<button><a href=\"../shipping/peddingShipping.php\"><p>Acertamentos Pedentes</p><i class=\"fa-solid fa-pen\"></i></a></button>";?>
-        <button><a href=""><p>Lucros</p><i class="fa-solid fa-money-bill"></i></a></button>
+        <button><a href="../earnings/earning.php"><p>Lucros</p><i class="fa-solid fa-money-bill"></i></a></button>
     </div>
     <div id="container">
         <div id="container-form">
@@ -138,7 +138,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             </form>
         </div>
         <?php 
-            $sql='SELECT travel.id_travel AS travel, travel.dia AS day, driver.nome AS driver, travel.valor AS value FROM travel, driver WHERE travel.id_driver = driver.id_driver AND id_shipping IS NULL';
+            $sql='SELECT travel.id_travel AS travel, travel.dia AS day, driver.nome AS driver, travel.valor AS value, carrier.nome as carrier FROM travel, driver, carrier WHERE travel.id_driver = driver.id_driver AND travel.id_carrier = carrier.id_carrier AND id_shipping IS NULL';
             $result = $conn->query($sql);
             if($result->num_rows > 0):
         ?>
@@ -150,6 +150,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                         <th>Dia</th>
                         <th>Motorista</th>
                         <th>Valor</th>
+                        <th>Empresa</th>
                     </tr>
                 </thead>
                 <tbody>

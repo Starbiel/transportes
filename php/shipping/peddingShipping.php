@@ -56,12 +56,19 @@ function extraCalcs() {
                 <div class='driverResult'>
                     <div class='driverHeader'>
                         <h3>Motorista</h3>
-                        <button class='moreInput'>+</button>
+                        <button class='moreInput'>...</button>
+                        <div class='optionsInput'>
+                            <button class='vale'>Vale</button>
+                            <button class='literDiesel'>Litros Diesel</button>
+                            <button class='toll'>Pedagios</button>
+                            <button class='Diesel'>Diesel Feito</button>
+                    </div>
                     </div>
                 </div>
                 <div class='truckResult'>
                     <div class='driverHeader'>
                         <h3>Caminhão</h3>
+                        <button class='moreInput'>+</button>
                     </div>
                 </div>
             </div>";
@@ -96,8 +103,9 @@ function singleShippingCretor($row) {
     <div id='nav-bar'>
         <button><a href="../../index.php"><p>Menu Principal</p><i class="fa-solid fa-house"></i></a></button>
         <button><a href="../drivers/newDriver.php"><p>Cadastrar Motorista</p><i class="fa-solid fa-person"></i></a></button>
-        <button><a href="../truck/truck.php"><p>Caminhões</p><i class="fa-solid fa-road"></i></a></button>
-        <button><a href=""><p>Lucros</p><i class="fa-solid fa-money-bill"></i></a></button>
+        <button><a href="../truck/truck.php"><p>Caminhões</p><i class="fa-solid fa-truck"></i></a></button>
+        <button><a href="../travel/newTravel.php"><p>Abrir viagem</p><i class="fa-solid fa-road"></i></a></button>
+        <button><a href="../earnings/earning.php"><p>Lucros</p><i class="fa-solid fa-money-bill"></i></a></button>
     </div>
     <div id='container'>
         <div id='shippings'>
@@ -121,6 +129,14 @@ function singleShippingCretor($row) {
             var extraCalcDiv = $(this).parent().parent().parent().parent().siblings(".extraCalcDiv");
             extraCalcDiv.slideToggle('slow');
         });
+
+        $(".optionsInput").hide();
+        $(".moreInput").click(function(){
+            var extraCalcDiv = $(this).siblings(".optionsInput");
+            extraCalcDiv.slideToggle('slow');
+        });
+
+
     </script>
 </html>
 

@@ -1,6 +1,6 @@
 import { createConfirm } from "../../script/confirmWindow.js";
 const closeShipping = document.getElementsByClassName('closeShipping');
-const moreInputButton = document.getElementsByClassName('moreInput');
+const moreInputButton = document.getElementsByClassName('optionsInput');
 
 for (let index = 0; index < closeShipping.length; index++) {
     closeShipping[index].addEventListener('click', function() {
@@ -8,38 +8,53 @@ for (let index = 0; index < closeShipping.length; index++) {
     })
 }
 
-//ADD NEW INPUTS
+//ADD NEW INPUTS TO DRIVER and TRUCK
 
 for (let index = 0; index < moreInputButton.length; index++) {
-    moreInputButton[index].addEventListener('click', function() {
-        const newInput = document.createElement('input');
-        newInput.type = 'number'
-        newInput.classList.add("inputOf"+index);
-        newInput.addEventListener('change', function() {
-            let data = new FormData();
-            let shippingId = this.parentElement.parentElement.previousElementSibling.firstChild.lastChild.querySelector('td:nth-child(4)').firstChild.id;
-            var element = this.parentElement;
-            var inputs = element.querySelectorAll('input');
-            let inputsValues = [];
-            inputs.forEach(function(input) {            
-                inputsValues.push(input.value);
-            });
-            data.append('extras', JSON.stringify(inputsValues));
-            data.append('shippingId', shippingId)
-            fetch('takeShipping.php', {
-                method: 'POST',
-                body: data
+    let buttons = moreInputButton[index].querySelectorAll('button');
+    for (let i = 0; i < buttons.length; i++) {
+        buttons[i].addEventListener('click', function() {
+            const newInput = document.createElement('input');
+            newInput.type = 'number'
+            newInput.classList.add("inputOf"+index);
+            const a = document.createAttribute("subType");
+            a.value = this.className;
+            newInput.setAttributeNode(a);
+            newInput.step = 0.01;
+            newInput.addEventListener('change', function() {
+                let data = new FormData();
+                let shippingId = this.parentElement.parentElement.previousElementSibling.firstElementChild.lastChild.querySelector('td:nth-child(4)').firstChild.id;
+                let element = this.parentElement;
+                let inputs = element.querySelectorAll('input');
+                let inputsValues = [];
+                inputs.forEach(function(input) {   
+                    let single = [input.value, input.getAttribute('subtype')];         
+                    inputsValues.push(single);
+                });
+                data.append('extras', JSON.stringify(inputsValues));
+                data.append('shippingId', shippingId)
+                data.append('returnParam', element.className)
+                fetch('takeShipping.php', {
+                    method: 'POST',
+                    body: data
+                })
+                .then(response => response.text())
+                .then(data => {
+                    console.log(data);
+                    let elementChanges = "";
+                    if(element.className == 'truckResult') {
+                        return 0;
+                    }
+                    else if(element.className == 'driverResult') {
+                        elementChanges = (this.parentElement.parentElement.previousElementSibling.firstElementChild.lastChild.querySelector('td:nth-child(1)').lastChild)
+                    }
+                    elementChanges.innerHTML = "R$" + data;
+                })
             })
-            .then(response => response.text())
-            .then(data => {
-                console.log(data);
-                const elementChanges = (this.parentElement.parentElement.previousElementSibling.firstChild.lastChild.querySelector('td:nth-child(1)').lastChild)
-                elementChanges.innerHTML = "R$" + data;
-            })
+            const elementParent = this.parentElement.parentElement.parentElement;
+            elementParent.appendChild(newInput)
         })
-        const elementParent = this.parentElement.parentElement;
-        elementParent.appendChild(newInput)
-    })
+    }
 }
 
 
@@ -53,16 +68,26 @@ function creatorCallback(mutationsList, observer) {
                 myNewElement.addEventListener('click', function() {
                     for (let index = 0; index < closeShipping.length; index++) {
                         if(closeShipping[index].id == this.id) {
-                            let inputsApply = document.getElementsByClassName("inputOf"+index);
-                            let inputsValues = [];
-                            for (let i = 0; i < inputsApply.length; i++) {
-                                if(inputsApply[i].value != 0) {
-                                    inputsValues.push(inputsApply[i].value);
+                            let inputsApplyDriver = document.getElementsByClassName('driverResult')[index].querySelectorAll('input');
+                            let inputsValuesDriver = [];
+                            let inputsApplyTruck = document.getElementsByClassName('truckResult')[index].querySelectorAll('input');
+                            let inputsValuesTruck = [];
+                            for (let i = 0; i < inputsApplyDriver.length; i++) {
+                                let auxArray = [inputsApplyDriver[i].value, inputsApplyDriver[i].getAttribute('subtype')]
+                                if(inputsApplyDriver[i].value != 0) {
+                                    inputsValuesDriver.push(auxArray);
+                                }
+                            }
+                            for (let j = 0; j < inputsApplyTruck.length; j++) {
+                                let auxArray = [inputsApplyDriver[i].value, inputsApplyDriver[i].getAttribute('subtype')]
+                                if(inputsApplyTruck[j].value != 0) {
+                                    inputsValuesTruck.push(auxArray);
                                 }
                             }
                             let data = new FormData();
                             data.append('shippingId', this.id);
-                            data.append('extras', JSON.stringify(inputsValues));
+                            data.append('extrasDriver', JSON.stringify(inputsValuesDriver));
+                            data.append('extrasTruck', JSON.stringify(inputsValuesTruck));
                             fetch('closeShipping.php', {
                                 method: 'POST',
                                 body: data

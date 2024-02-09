@@ -25,8 +25,8 @@ $executer = new Execute;
         <button><a href="php/drivers/newDriver.php">Cadastrar Motorista</a></button>
         <button><a href="php/truck/truck.php">Caminhões</a></button>
         <button><a href="php/travel/newTravel.php">Abrir viagem</a></button>
-        <?php if($executer->shippingOpen($conn)[0])echo "<button><a href=\"../shipping/peddingShipping.php\"><p>Acertamentos Pedentes</p><i class=\"fa-solid fa-pen\"></i></a></button>";?>
-        <button><a href="">Lucros</a></button>
+        <?php if($executer->shippingOpen($conn)[0])echo "<button><a href=\"php/shipping/peddingShipping.php\"><p>Acertamentos Pedentes</p><i class=\"fa-solid fa-pen\"></i></a></button>";?>
+        <button><a href="php/earnings/earning.php"><p>Lucros</p><i class="fa-solid fa-money-bill"></i></a></button>
     </div>
 </body>
 </html>

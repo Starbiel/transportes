@@ -2,7 +2,7 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 body {
-    background-color: rgb(221, 221, 221);
+    background-color: rgb(136, 136, 136);
 }
 
 #nav-bar {
@@ -13,7 +13,7 @@ body {
     padding-top: 10px;
     width: 97.3vw;
     margin: auto;
-    background-color:  rgb(221, 221, 221);
+    background-color:  rgb(136, 136, 136);
     border-bottom: 2px solid black;
 }
 
@@ -21,8 +21,8 @@ body {
     width: 15%;
     border-radius: 10px;
     height: 60px;
-    box-shadow: 2px 2px 2px 2px rgb(112, 112, 112);
-    background-color: rgb(252, 252, 252);
+    box-shadow: 2px 2px 2px 2px rgb(48, 48, 48);
+    background-color: rgb(255, 255, 255);
 }
 
 #nav-bar > button > a {
@@ -61,13 +61,13 @@ button {
     margin: 0px auto 0px auto;
     border-radius: 10px;
     border: 1px solid black;
-    box-shadow: 2px 2px 2px 2px rgb(112, 112, 112);
+    box-shadow: 2px 2px 2px 2px rgb(48, 48, 48);
     background-color: aliceblue;
     margin-bottom: 10px;
 }
 
 button:hover {
-    background-color: rgb(188, 252, 93);
+    background: linear-gradient(90deg, rgba(128, 255, 0, 0.5), rgb(123, 253, 2))
 }
 
 #confirmBack {

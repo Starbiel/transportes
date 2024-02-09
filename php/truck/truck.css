@@ -29,7 +29,7 @@ button {
     margin-bottom: 0;
 }
 button:hover {
-    background-color: rgb(188, 252, 93);
+    background-color: rgb(149, 193, 31);
 }
 
 a {
@@ -101,7 +101,7 @@ tr:nth-child(even) {
 
 .truck:hover {
     cursor: pointer;
-    background-color: greenyellow;
+    background-color: rgb(149, 193, 31);
 }
 ::-webkit-scrollbar-thumb {
     background-color: #ffbebe;

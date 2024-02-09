@@ -38,7 +38,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
   }
   else if($validator->basicChecker($_POST['delete'])) {
-    $sql = "UPDATE driver SET ativo = 0 WHERE id_driver= ? ";
+    $sql = "UPDATE driver SET ativo = 0, id_truck = NULL WHERE id_driver= ? ";
+    $statement = $conn->prepare($sql);
+    $statement->bind_param('i', $_POST['delete']);
+    $statement->execute();
+    $sql = "UPDATE truck SET id_driver = NULL WHERE id_driver = ? ";
     $statement = $conn->prepare($sql);
     $statement->bind_param('i', $_POST['delete']);
     $statement->execute();
@@ -123,7 +127,7 @@ else {
         <button><a href="../truck/truck.php"><p>Caminhões</p><i class="fa-solid fa-truck"></i></i></a></button>
         <button><a href="../travel/newTravel.php"><p>Abrir viagem</p><i class="fa-solid fa-road"></i></a></button>
         <?php if($executer->shippingOpen($conn)[0])echo "<button><a href=\"../shipping/peddingShipping.php\"><p>Acertamentos Pedentes</p><i class=\"fa-solid fa-pen\"></i></a></button>";?>
-        <button><a href=""><p>Lucros</p><i class="fa-solid fa-money-bill"></i></a></button>
+        <button><a href="../earnings/earning.php"><p>Lucros</p><i class="fa-solid fa-money-bill"></i></a></button>
     </div>
     <div id="container">
         <div id="add-driver">

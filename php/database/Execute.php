@@ -12,6 +12,7 @@ class Execute {
     private int $driverID = 0;
     private string $driverName = "";
     private string $driverNumber = "";
+    private float $driverEarnings = 0;
     private int $documentId = 0;
     private bool $driverState = True;
     private int $truckId = 0;
@@ -67,12 +68,19 @@ class Execute {
                     $this->shippingSum = $rowTwo['result'];
                 }
             }
+            $sql = "SELECT sum(driverPayment) as driverEarning FROM shipping WHERE id_driver = $this->driverID";
+            $resultTwo = $conn->query($sql);
+            if($resultTwo->num_rows > 0) {
+                $rowTwo = $resultTwo->fetch_assoc();
+                $this->driverEarnings = round($rowTwo['driverEarning'], 2);
+            }
             $conn->next_result();
         }
         return [
             'driverId' => $this->driverID,
             'name' => $this->driverName,
             'number' => $this->driverNumber,
+            'earning' => $this->driverEarnings,
             'state' => $this->driverState,
             'plate' => $this->truckPlate,
             'truckId' => $this->truckId,

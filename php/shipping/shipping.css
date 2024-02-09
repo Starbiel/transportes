@@ -1,3 +1,7 @@
+body {
+    margin-top: 0;
+}
+
 .singleShipping {
     display: flex;
     flex-direction: column;
@@ -76,6 +80,17 @@ td {
     margin: 0;
 }
 
+.optionsInput {
+    background-color: white;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    width: 150px;
+    flex-wrap: wrap;
+    border: 1px solid black;
+    padding: 5%;
+}
+
 input {
     margin-bottom: 15px;
 }
@@ -102,5 +117,8 @@ input {
     }
     button > i {
         font-size: 25px;
+    }
+    .closeShipping > i {
+        display: initial;
     }
 }
